@@ -21,7 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.ytx.activity.TitleBarActivity;
-import com.ytx.app.AppContext;
+import com.ytx.app.BaseApplication;
 
 /**
  * 
@@ -47,14 +47,14 @@ public abstract class TitleBarFragment extends KJFragment {
 
     private final ActionBarRes actionBarRes = new ActionBarRes();
     protected TitleBarActivity outsideAty;
-    protected AppContext app;
+    protected BaseApplication app;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (getActivity() instanceof TitleBarActivity) {
             outsideAty = (TitleBarActivity) getActivity();
         }
-        app = (AppContext) getActivity().getApplication();
+        app = (BaseApplication) getActivity().getApplication();
         super.onCreate(savedInstanceState);
     }
 

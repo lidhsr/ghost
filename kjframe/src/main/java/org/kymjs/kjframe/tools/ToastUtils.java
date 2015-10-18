@@ -1,12 +1,10 @@
-package com.solarcode.deal.tools;
+package org.kymjs.kjframe.tools;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Gravity;
 import android.widget.Toast;
-
-import com.solarcode.deal.app.BaseApplication;
 
 /**
  * Toast工具, 解决Toast延迟弹出问题.
@@ -20,9 +18,6 @@ public class ToastUtils {
 	private static Toast toast = null;
 
 	public static void showMessage(final Context context, final String msg) {
-		if (!BaseApplication.isRunning) {
-			return;
-		}
 		showMessage(context, msg, Toast.LENGTH_SHORT);
 	}
 
