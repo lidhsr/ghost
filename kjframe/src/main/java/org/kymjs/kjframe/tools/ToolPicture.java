@@ -34,7 +34,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import org.kymjs.kjframe.config.SysEnv;
-import org.kymjs.kjframe.jni.ImageBlur;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -52,60 +51,60 @@ import java.util.Random;
  */
 public class ToolPicture {
 	
-	/**
-	 * 高斯模糊效果JNI实现
-	 * @param sentBitmap
-	 * @param radius
-	 * @param canReuseInBitmap
-	 * @return
-	 */
-	public static Bitmap doBlurJniArray(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
-        Bitmap bitmap;
-        if (canReuseInBitmap) {
-            bitmap = sentBitmap;
-        } else {
-            bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
-        }
-
-        if (radius < 1) {
-            return (null);
-        }
-
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-
-        int[] pix = new int[w * h];
-        bitmap.getPixels(pix, 0, w, 0, 0, w, h);
-        //Jni Pixels
-        ImageBlur.blurIntArray(pix, w, h, radius);
-
-        bitmap.setPixels(pix, 0, w, 0, 0, w, h);
-        return (bitmap);
-    }
-
-	/**
-	 * 高斯模糊效果JNI实现
-	 * @param sentBitmap
-	 * @param radius
-	 * @param canReuseInBitmap
-	 * @return
-	 */
-    public static Bitmap doBlurJniBitMap(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
-        Bitmap bitmap;
-        if (canReuseInBitmap) {
-            bitmap = sentBitmap;
-        } else {
-            bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
-        }
-
-        if (radius < 1) {
-            return (null);
-        }
-        //Jni BitMap
-        ImageBlur.blurBitMap(bitmap, radius);
-
-        return (bitmap);
-    }
+//	/**
+//	 * 高斯模糊效果JNI实现
+//	 * @param sentBitmap
+//	 * @param radius
+//	 * @param canReuseInBitmap
+//	 * @return
+//	 */
+//	public static Bitmap doBlurJniArray(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
+//        Bitmap bitmap;
+//        if (canReuseInBitmap) {
+//            bitmap = sentBitmap;
+//        } else {
+//            bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
+//        }
+//
+//        if (radius < 1) {
+//            return (null);
+//        }
+//
+//        int w = bitmap.getWidth();
+//        int h = bitmap.getHeight();
+//
+//        int[] pix = new int[w * h];
+//        bitmap.getPixels(pix, 0, w, 0, 0, w, h);
+//        //Jni Pixels
+//        ImageBlur.blurIntArray(pix, w, h, radius);
+//
+//        bitmap.setPixels(pix, 0, w, 0, 0, w, h);
+//        return (bitmap);
+//    }
+//
+//	/**
+//	 * 高斯模糊效果JNI实现
+//	 * @param sentBitmap
+//	 * @param radius
+//	 * @param canReuseInBitmap
+//	 * @return
+//	 */
+//    public static Bitmap doBlurJniBitMap(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
+//        Bitmap bitmap;
+//        if (canReuseInBitmap) {
+//            bitmap = sentBitmap;
+//        } else {
+//            bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
+//        }
+//
+//        if (radius < 1) {
+//            return (null);
+//        }
+//        //Jni BitMap
+//        ImageBlur.blurBitMap(bitmap, radius);
+//
+//        return (bitmap);
+//    }
 
 	public static Bitmap takeScreenShotQQ(Activity activity) {
 		// View是你需要截图的View
