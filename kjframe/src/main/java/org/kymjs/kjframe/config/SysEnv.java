@@ -56,8 +56,8 @@ public final class SysEnv {
 	/***屏幕高度**/
 	public static final int SCREEN_HEIGHT = getDisplayMetrics().heightPixels;
 	
-	/***本机手机号码**/
-	public static final String PHONE_NUMBER = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
+//	/***本机手机号码**/
+//	public static final String PHONE_NUMBER = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
 	
 	/***设备ID**/
 	public static final String DEVICE_ID = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();

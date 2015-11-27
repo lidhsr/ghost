@@ -16,24 +16,24 @@
 package org.kymjs.kjframe.widget;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.widget.Scroller;
 
 /**
  * 左右滑动切换屏幕控件,用于替换系统的ViewPager，优势在于不需要每次滑动都加载视图
- * 
+ * <p/>
  * <b>创建时间</b> 2014-9-12
- * 
+ *
  * @author kymjs (https://github.com/kymjs)
  * @version 1.0
  */
-public class KJViewPager extends ViewGroup {
-    private final Scroller mScroller;
+public class KJViewPager extends ViewPager {
+    private Scroller mScroller;
     private VelocityTracker mVelocityTracker;
     private int mCurScreen;
     private final int mDefaultScreen = 0;
@@ -41,7 +41,7 @@ public class KJViewPager extends ViewGroup {
     private static final int TOUCH_STATE_SCROLLING = 1;
     private static final int SNAP_VELOCITY = 600;
     private int mTouchState = TOUCH_STATE_REST;
-    private final int mTouchSlop;
+    private int mTouchSlop;
     private float mLastMotionX;
     private float mLastMotionY;
     private OnViewChangeListener mOnViewChangeListener;
@@ -56,7 +56,7 @@ public class KJViewPager extends ViewGroup {
     }
 
     public KJViewPager(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+        super(context, attrs);
         mScroller = new Scroller(context);
         mCurScreen = mDefaultScreen;
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
@@ -174,46 +174,46 @@ public class KJViewPager extends ViewGroup {
         final float x = event.getX();
         final float y = event.getY();
         switch (action) {
-        case MotionEvent.ACTION_DOWN:
-            if (!mScroller.isFinished()) {
-                mScroller.abortAnimation();
-            }
-            mLastMotionX = x;
-            mLastMotionY = y;
-            break;
-        case MotionEvent.ACTION_MOVE:
-            int deltaX = (int) (mLastMotionX - x);
-            int deltaY = (int) (mLastMotionY - y);
-            if (Math.abs(deltaX) < 200 && Math.abs(deltaY) > 10)
+            case MotionEvent.ACTION_DOWN:
+                if (!mScroller.isFinished()) {
+                    mScroller.abortAnimation();
+                }
+                mLastMotionX = x;
+                mLastMotionY = y;
                 break;
-            mLastMotionY = y;
-            mLastMotionX = x;
-            scrollBy(deltaX, 0);
-            break;
-        case MotionEvent.ACTION_UP:
-            // if (mTouchState == TOUCH_STATE_SCROLLING) {
-            final VelocityTracker velocityTracker = mVelocityTracker;
-            velocityTracker.computeCurrentVelocity(1000);
-            int velocityX = (int) velocityTracker.getXVelocity();
-            if (velocityX > SNAP_VELOCITY && mCurScreen > 0) {
-                // Fling enough to move left
-                snapToScreen(mCurScreen - 1);
-            } else if (velocityX < -SNAP_VELOCITY
-                    && mCurScreen < getChildCount() - 1) {
-                // Fling enough to move right
-                snapToScreen(mCurScreen + 1);
-            } else {
-                snapToDestination();
-            }
-            if (mVelocityTracker != null) {
-                mVelocityTracker.recycle();
-                mVelocityTracker = null;
-            }
-            mTouchState = TOUCH_STATE_REST;
-            break;
-        case MotionEvent.ACTION_CANCEL:
-            mTouchState = TOUCH_STATE_REST;
-            break;
+            case MotionEvent.ACTION_MOVE:
+                int deltaX = (int) (mLastMotionX - x);
+                int deltaY = (int) (mLastMotionY - y);
+                if (Math.abs(deltaX) < 200 && Math.abs(deltaY) > 10)
+                    break;
+                mLastMotionY = y;
+                mLastMotionX = x;
+                scrollBy(deltaX, 0);
+                break;
+            case MotionEvent.ACTION_UP:
+                // if (mTouchState == TOUCH_STATE_SCROLLING) {
+                final VelocityTracker velocityTracker = mVelocityTracker;
+                velocityTracker.computeCurrentVelocity(1000);
+                int velocityX = (int) velocityTracker.getXVelocity();
+                if (velocityX > SNAP_VELOCITY && mCurScreen > 0) {
+                    // Fling enough to move left
+                    snapToScreen(mCurScreen - 1);
+                } else if (velocityX < -SNAP_VELOCITY
+                        && mCurScreen < getChildCount() - 1) {
+                    // Fling enough to move right
+                    snapToScreen(mCurScreen + 1);
+                } else {
+                    snapToDestination();
+                }
+                if (mVelocityTracker != null) {
+                    mVelocityTracker.recycle();
+                    mVelocityTracker = null;
+                }
+                mTouchState = TOUCH_STATE_REST;
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                mTouchState = TOUCH_STATE_REST;
+                break;
         }
         return true;
     }
@@ -231,30 +231,39 @@ public class KJViewPager extends ViewGroup {
         final float x = ev.getX();
         final float y = ev.getY();
         switch (action) {
-        case MotionEvent.ACTION_MOVE:
-            final int xDiff = (int) Math.abs(mLastMotionX - x);
-            if (xDiff > mTouchSlop) {
-                mTouchState = TOUCH_STATE_SCROLLING;
-            }
-            break;
-        case MotionEvent.ACTION_DOWN:
-            mLastMotionX = x;
-            mLastMotionY = y;
-            mTouchState = mScroller.isFinished() ? TOUCH_STATE_REST
-                    : TOUCH_STATE_SCROLLING;
-            break;
-        case MotionEvent.ACTION_CANCEL:
-        case MotionEvent.ACTION_UP:
-            mTouchState = TOUCH_STATE_REST;
-            break;
+            case MotionEvent.ACTION_MOVE:
+                final int xDiff = (int) Math.abs(mLastMotionX - x);
+                if (xDiff > mTouchSlop) {
+                    mTouchState = TOUCH_STATE_SCROLLING;
+                }
+                break;
+            case MotionEvent.ACTION_DOWN:
+                mLastMotionX = x;
+                mLastMotionY = y;
+                mTouchState = mScroller.isFinished() ? TOUCH_STATE_REST
+                        : TOUCH_STATE_SCROLLING;
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                mTouchState = TOUCH_STATE_REST;
+                break;
         }
         return mTouchState != TOUCH_STATE_REST;
 
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean ret = super.dispatchTouchEvent(ev);
+        if (ret) {
+            requestDisallowInterceptTouchEvent(true);
+        }
+        return ret;
+    }
+
     /**
      * 设置屏幕切换监听器
-     * 
+     *
      * @param listener
      */
     public void setOnViewChangeListener(OnViewChangeListener listener) {
@@ -270,7 +279,7 @@ public class KJViewPager extends ViewGroup {
 
     /**
      * 设置控件是否可以左右滑动
-     * 
+     *
      * @param scroll
      */
     public void setCanScroll(boolean scroll) {

@@ -56,7 +56,7 @@ public abstract class ToolImage {
 		 */
 		// .denyCacheImageMultipleSizesInMemory()
 		// You can pass your own memory cache implementation
-		.memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 *1024))
+		.memoryCache(new UsingFreqLimitedMemoryCache(5 * 1024 *1024))//建议内存设在5-10M,可以有比较好的表现
 		.memoryCacheSize(2 * 1024 * 1024)
 		.diskCacheSize(50 * 1024 * 1024)// 硬盘缓存50MB
 		.diskCacheFileNameGenerator(new HashCodeFileNameGenerator())// 将保存的时候的URI名称用MD5
@@ -64,7 +64,7 @@ public abstract class ToolImage {
 		.diskCacheFileCount(100)// 缓存的File数量
 		.diskCache(new UnlimitedDiskCache(cacheDir))// 自定义缓存路径
 		.defaultDisplayImageOptions(DisplayImageOptions.createSimple())
-		.imageDownloader(new BaseImageDownloader(context, 5 * 1000,30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间
+				.imageDownloader(new BaseImageDownloader(context, 5 * 1000,30 * 1000)) // connectTimeout (5 s), readTimeout (30 s)超时时间
 		.build();
 
 		// 全局初始化此配置

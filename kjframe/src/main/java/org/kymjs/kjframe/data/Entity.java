@@ -2,6 +2,8 @@ package org.kymjs.kjframe.data;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * 所有数据实体的基类.<br>
  * <p>
@@ -11,7 +13,7 @@ import org.json.JSONObject;
  * 
  * @version 1.0.0
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 
 	/**
 	 * 数据实体构造器, 提供实例化方法.

@@ -29,6 +29,8 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 /**
+ * HTTPS信任证书
+ *
  * @author kymjs (http://www.kymjs.com/) on 9/23/15.
  */
 public class HTTPSTrustManager implements X509TrustManager {
@@ -38,7 +40,7 @@ public class HTTPSTrustManager implements X509TrustManager {
 
     @Override
     public void checkClientTrusted(
-            java.security.cert.X509Certificate[] x509Certificates, String s)
+            X509Certificate[] x509Certificates, String s)
             throws java.security.cert.CertificateException {
         // To change body of implemented methods use File | Settings | File
         // Templates.
@@ -46,7 +48,7 @@ public class HTTPSTrustManager implements X509TrustManager {
 
     @Override
     public void checkServerTrusted(
-            java.security.cert.X509Certificate[] x509Certificates, String s)
+            X509Certificate[] x509Certificates, String s)
             throws java.security.cert.CertificateException {
         // To change body of implemented methods use File | Settings | File
         // Templates.

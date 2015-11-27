@@ -21,9 +21,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -56,6 +58,8 @@ public abstract class KJAdapter<T> extends BaseAdapter implements
         mInflater = LayoutInflater.from(mCxt);
         mList.setOnScrollListener(this);
     }
+
+
 
     public void refresh(Collection<T> datas) {
         if (datas == null) {

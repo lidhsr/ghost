@@ -296,7 +296,7 @@ public abstract class KJActivity extends FragmentActivity implements
             transaction.show(targetFragment);
             targetFragment.onChange();
         }
-        if (currentKJFragment != null && currentKJFragment.isVisible()) {
+        if (currentKJFragment != null && currentKJFragment.isVisible()) {//当前的fragment是现实的就隐藏
             transaction.hide(currentKJFragment);
         }
         currentKJFragment = targetFragment;

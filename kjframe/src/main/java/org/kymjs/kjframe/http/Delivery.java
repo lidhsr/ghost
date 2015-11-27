@@ -18,7 +18,7 @@ package org.kymjs.kjframe.http;
 /**
  * 分发器，将异步线程中的结果响应到UI线程中
  * 
- * @author kymjs
+ * @author kymjs (http://www.kymjs.com/).
  * 
  */
 public interface Delivery {
@@ -46,7 +46,7 @@ public interface Delivery {
      * 那么之前返回的那个有效但需要刷新的就是中介响应
      */
     public void postResponse(Request<?> request, Response<?> response,
-            Runnable runnable);
+                             Runnable runnable);
 
     /**
      * 分发下载进度事件
@@ -56,7 +56,7 @@ public interface Delivery {
      * @param downloadedSize
      */
     public void postDownloadProgress(Request<?> request, long fileSize,
-            long downloadedSize);
+                                     long downloadedSize);
 
     public void postCancel(Request<?> request);
 

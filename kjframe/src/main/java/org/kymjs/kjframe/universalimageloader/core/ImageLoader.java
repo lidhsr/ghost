@@ -419,8 +419,9 @@ public class ImageLoader {
 	 *                 thread if this method is called on UI thread.
 	 * @throws IllegalStateException if {@link #init(ImageLoaderConfiguration)} method wasn't called before
 	 */
-	public void loadImage(String uri, ImageLoadingListener listener) {
+	public Bitmap loadImage(String uri, ImageLoadingListener listener) {
 		loadImage(uri, null, null, listener, null);
+		return null;
 	}
 
 	/**

@@ -12,6 +12,6 @@ public interface HttpPostListener<T> {
 	 * 
 	 * @param result
 	 */
-	public void onResult(HttpResult<T> result);
+	public void onResult(int statusCode, HttpResult<T> result);
 	
 }

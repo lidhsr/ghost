@@ -28,7 +28,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import org.kymjs.kjframe.R;
 import org.kymjs.kjframe.pulltorefresh.internal.EmptyViewMethodAccessor;
 import org.kymjs.kjframe.pulltorefresh.internal.LoadingLayout;
