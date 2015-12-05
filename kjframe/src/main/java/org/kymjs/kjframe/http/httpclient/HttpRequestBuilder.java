@@ -343,6 +343,7 @@ public final class HttpRequestBuilder {
                 try {
                     handler.onResponse(resp);
                 } catch (HttpClientException e) {
+                    e.printStackTrace();
                     throw e;
                 } catch (Exception e) {
                     throw new HttpClientException("Error in response handler", e);

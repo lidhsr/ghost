@@ -161,7 +161,12 @@ public final class HttpResponse {
     public Map<String, String> getCookies() {
         return cookies;
     }
-    
+
+    /**
+     * 一次性的，读取一次后就没有了
+     * 在需要的地方另外保存使用
+     * @return
+     */
     public String asString() {
 		try {
 			InputStream in = getPayload();

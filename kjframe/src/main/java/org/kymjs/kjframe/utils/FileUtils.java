@@ -50,6 +50,9 @@ import android.provider.MediaStore;
  * @version 1.1
  */
 public final class FileUtils {
+
+    public static String SDPATH = Environment.getExternalStorageDirectory() + "/formats/";
+
     /**
      * 检测SD卡是否存在
      */
@@ -338,6 +341,28 @@ public final class FileUtils {
             closeIO(is);
         }
         return null == resultSb ? null : resultSb.toString();
+    }
+
+    public static void deleteDir() {
+        File dir = new File(SDPATH);
+        if (dir == null || !dir.exists() || !dir.isDirectory())
+            return;
+
+        for (File file : dir.listFiles()) {
+            if (file.isFile())
+                file.delete(); // 删除所有文件
+            else if (file.isDirectory())
+                deleteDir(); // 递规的方式删除文件夹
+        }
+        dir.delete();// 删除目录本身
+    }
+
+    public static void delFile(String fileName){
+        File file = new File(SDPATH + fileName);
+        if(file.isFile()){
+            file.delete();
+        }
+        file.exists();
     }
 
     // /**

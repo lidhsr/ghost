@@ -7,9 +7,9 @@ package org.kymjs.kjframe.app;
 public class HttpResultData {
 
     /** 请求结果ret **/
-    public static final String RET_CODE = "retCode";
+    public static final String RET_CODE = "resultCode";
     /** 请求结果数据 **/
-    public static final String RET_DATA = "retData";
+    public static final String RET_DATA = "resultData";
     /** 请求结果列表 **/
     public static final String RET_LIST = "list";
 
